@@ -1,11 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Container } from '../Aside/styles';
+import { Container, TitleContainer, Controllers } from './styles';
 
-const ContentHeader: React.FC = () => {
+interface IContentHeaderProps {
+    title: string;
+    lineColor: string;
+    children: React.ReactNode;
+}
+
+const ContentHeader: React.FC<IContentHeaderProps> = ({ title, lineColor, children }) => {
+
     return (
         <Container>
-            <h1>ContentHeader</h1>
+            <TitleContainer lineColor={lineColor}>
+                <h1>{title}</h1>
+            </TitleContainer>
+            <Controllers>
+                {children}
+            </Controllers>
         </Container>
     );
 };

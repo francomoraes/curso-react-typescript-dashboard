@@ -4,8 +4,11 @@ import Content from '../Content';
 import MainHeader from '../MainHeader';
 import { Grid } from './styles';
 
+interface Props {
+    children: React.ReactNode;
+  }
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<Props> = ({ children }) => {
     return (
         <Grid>
             <MainHeader />
