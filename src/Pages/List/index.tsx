@@ -35,7 +35,7 @@ const List: React.FC = () => {
         return movementType === 'entry-balance' ?
         {
             title: 'Entradas',
-            lineColor: '#F7931B',
+            lineColor: '#4E41F0',
             listData: gains
         } : {
             title: 'Saídas',

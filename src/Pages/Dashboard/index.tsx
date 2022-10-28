@@ -1,46 +1,28 @@
+//react
 import React, { useMemo, useState } from 'react'
-import ContentHeader from '../../components/ContentHeader'
-import { Container } from './styles'
-import SelectInput from '../../components/SelectInput';
 
+//assets
+import happyImg from '../../assets/happy.svg'
+import sadImg from '../../assets/sad.svg'
+
+//components
+import SelectInput from '../../components/SelectInput';
+import ContentHeader from '../../components/ContentHeader'
+
+//databases
 import gains from '../../repositories/gains';
 import expenses from '../../repositories/expenses';
-import formatDate from '../../utils/formatDate';
-import { useParams } from 'react-router-dom';
 
+//styles
+import { Container, Content } from './styles'
+import WalletBox from '../../components/WalletBox';
+import MessageBox from '../../components/MessageBox';
+
+//Component
 const Dashboard: React.FC = () => {
 
-    interface IData {
-        id: string;
-        description: string;
-        amountFormatted: string;
-        frequency: string;
-        dateFormatted: string;
-        tagColor: string;
-    }
-
-    const [ data, setData ] = useState<IData[]>([]);
     const [ monthSelected, setMonthSelected ] = useState<number>(new Date().getMonth() + 1);
     const [ yearSelected, setYearSelected ] = useState<number>(new Date().getFullYear());
-    const [ selectedFrequency, setSelectedFrequency ] = useState(['recorrente', 'eventual']);
-
-
-    const { movementType } = useParams();
-
-    const pageData = useMemo(() => {
-        return movementType === 'entry-balance' ?
-        {
-            title: 'Entradas',
-            lineColor: '#F7931B',
-            listData: gains
-        } : {
-            title: 'Saídas',
-            lineColor: '#E44C4E',
-            listData: expenses
-        }
-    }, [movementType]);
-
-    const { title, lineColor, listData } = pageData;
     
     const months = [
         {value: 1, label: 'Janeiro'},
@@ -60,7 +42,7 @@ const Dashboard: React.FC = () => {
     const years = useMemo(() => {
         let uniqueYears: number[] = [];
 
-        listData.forEach(item => {
+        [...expenses, ...gains].forEach(item => {
             const date = new Date(item.date);
             const year = date.getFullYear();
 
@@ -74,7 +56,7 @@ const Dashboard: React.FC = () => {
                 label: String(year)
             }
         });
-    }, [listData]);
+    }, []);
 
     return (
     <Container>
@@ -90,6 +72,37 @@ const Dashboard: React.FC = () => {
                     defaultValue={yearSelected}
                 />
         </ContentHeader>
+
+        <Content>
+            <WalletBox
+                title='Saldo'
+                amount={150}
+                footerLabel='atualizado com base nas entradas e saídas'
+                icon='dolar'
+                color='#4E41F0'
+            />
+            <WalletBox
+                title='Entradas'
+                amount={5000}
+                footerLabel='atualizado com base nas entradas e saídas'
+                icon='arrowUp'
+                color='#F7931B'
+            />
+            <WalletBox
+                title='Saídas'
+                amount={4850}
+                footerLabel='atualizado com base nas entradas e saídas'
+                icon='arrowDown'
+                color='#E44C4E'
+            />
+
+            <MessageBox 
+                title='Muito bem!'
+                description='Sua carteira está positiva'
+                footerText='Continue assim. Considere investir o seu saldo.'
+                icon={happyImg}
+            />
+        </Content>
     </Container>
 )
 }
