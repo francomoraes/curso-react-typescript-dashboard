@@ -14,6 +14,7 @@ export const Filters = styled.div`
         background: none;
         color: ${props => props.theme.color.white};
         margin: 0 10px;
+        opacity: 0.4;
         transition: opacity .3s;
 
         &:hover {
@@ -26,13 +27,17 @@ export const Filters = styled.div`
         display: block;
         width: 55px;
         margin: 0 auto;
-        border-bottom: 10px solid ${props => props.theme.color.warning};
+        border-bottom: 10px solid ${props => props.theme.color.success};
     }
     .tag-filter-eventual::after {
         content: '';
         display: block;
         width: 55px;
         margin: 0 auto;
-        border-bottom: 10px solid ${props => props.theme.color.success};
+        border-bottom: 10px solid ${props => props.theme.color.warning};
+    }
+
+    .tag-actived {
+        opacity: 1;
     }
 `;
