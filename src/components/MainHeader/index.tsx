@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import emojis from '../../styles/utils/emojis';
+import emojis from '../../utils/emojis';
 import Toggle from '../Toggle';
 import { Container, Profile, Welcome, UserName } from './styles';
 
