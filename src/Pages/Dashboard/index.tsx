@@ -20,6 +20,7 @@ import WalletBox from '../../components/WalletBox';
 import MessageBox from '../../components/MessageBox';
 import PieChartComponent from '../../components/Charts/Piechart';
 import HistoryBox from '../../components/Charts/HistoryBox';
+import BarchartBox from '../../components/Charts/Barchart';
 
 //Component
 const Dashboard: React.FC = () => {
@@ -190,7 +191,7 @@ const Dashboard: React.FC = () => {
 
             return {
                 monthNumber: month,
-                month: months[month].label.substring(0, 2),
+                month: months[month].label.substring(0, 3),
                 amountGains,
                 amountExpenses
             }
@@ -202,6 +203,89 @@ const Dashboard: React.FC = () => {
             return (yearSelected === currentYear && item.monthNumber <= currentMonth) || (yearSelected < currentYear);
         }); 
     }, [months, yearSelected]);
+
+    const recurrentVsEventualExpenses = useMemo(() => {
+        let amountRecurrent = 0;
+        let amountEventual = 0;
+
+        expenses.filter((item) => {
+            const date = new Date(item.date);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+
+            return month === monthSelected && year === yearSelected;
+        })
+        .forEach((item) => {
+            if (item.frequency === 'recorrente') {
+                return amountRecurrent += Number(item.amount);
+            }
+            if (item.frequency === 'eventual') {
+                return amountEventual += Number(item.amount);
+            }
+        });
+
+        const total = amountRecurrent + amountEventual;
+
+        const recurrentPercent = Number(((amountRecurrent / total) * 100).toFixed(1));
+        const eventualPercent = Number(((amountEventual / total) * 100).toFixed(1));
+
+        return [
+            {
+                name: 'Recorrentes',
+                amount: amountRecurrent,
+                percent: recurrentPercent || 0,
+                color: '#F7931B'
+            },
+            {
+                name: 'Eventuais',
+                amount: amountEventual,
+                percent: eventualPercent || 0,
+                color: '#E44C4E'
+            }
+        ]
+    },[monthSelected, yearSelected]);
+
+    const recurrentVsEventualGains = useMemo(() => {
+        let amountRecurrent = 0;
+        let amountEventual = 0;
+
+        gains.filter((item) => {
+            const date = new Date(item.date);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+
+            return month === monthSelected && year === yearSelected;
+        })
+        .forEach((item) => {
+            if (item.frequency === 'recorrente') {
+                return amountRecurrent += Number(item.amount);
+            }
+            if (item.frequency === 'eventual') {
+                return amountEventual += Number(item.amount);
+            }
+            
+        });
+
+        const total = amountRecurrent + amountEventual;
+        
+        const percentRecorrent = Number(((amountRecurrent / total) * 100).toFixed(1));
+        const percentEventual = Number(((amountEventual / total) * 100).toFixed(1));
+
+        return [
+            {
+                name: 'Recorrentes',
+                amount: amountRecurrent,
+                percent: percentRecorrent || 0,
+                color: '#F7931B'
+            },
+            {
+                name: 'Eventuais',
+                amount: amountEventual,
+                percent: percentEventual || 0,
+                color: '#E44C4E'
+            }
+        ]
+    },[monthSelected, yearSelected]);
 
     return (
     <Container>
@@ -253,6 +337,8 @@ const Dashboard: React.FC = () => {
                 lineColorExpenses="#F7931B"
                 lineColorGains="#E44C4E"
             />
+            <BarchartBox title="Entradas" data={recurrentVsEventualGains} />
+            <BarchartBox title="Saídas" data={recurrentVsEventualExpenses} />
         </Content>
     </Container>
 )
