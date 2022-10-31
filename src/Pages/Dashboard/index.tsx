@@ -18,7 +18,8 @@ import expenses from '../../repositories/expenses';
 import { Container, Content } from './styles'
 import WalletBox from '../../components/WalletBox';
 import MessageBox from '../../components/MessageBox';
-import PieChartComponent from '../../components/Piechart';
+import PieChartComponent from '../../components/Charts/Piechart';
+import HistoryBox from '../../components/Charts/HistoryBox';
 
 //Component
 const Dashboard: React.FC = () => {
@@ -26,20 +27,22 @@ const Dashboard: React.FC = () => {
     const [ monthSelected, setMonthSelected ] = useState<number>(new Date().getMonth() + 1);
     const [ yearSelected, setYearSelected ] = useState<number>(new Date().getFullYear());
     
-    const months = [
-        {value: 1, label: 'Janeiro'},
-        {value: 2, label: 'Fevereiro'},
-        {value: 3, label: 'Março'},
-        {value: 4, label: 'Abril'},
-        {value: 5, label: 'Maio'},
-        {value: 6, label: 'Junho'},
-        {value: 7, label: 'Julho'},
-        {value: 8, label: 'Agosto'},
-        {value: 9, label: 'Setembro'},
-        {value: 10, label: 'Outubro'},
-        {value: 11, label: 'Novembro'},
-        {value: 12, label: 'Dezembro'}
-    ];
+    const months = useMemo(() => {
+       return [
+            {value: 1, label: 'Janeiro'},
+            {value: 2, label: 'Fevereiro'},
+            {value: 3, label: 'Março'},
+            {value: 4, label: 'Abril'},
+            {value: 5, label: 'Maio'},
+            {value: 6, label: 'Junho'},
+            {value: 7, label: 'Julho'},
+            {value: 8, label: 'Agosto'},
+            {value: 9, label: 'Setembro'},
+            {value: 10, label: 'Outubro'},
+            {value: 11, label: 'Novembro'},
+            {value: 12, label: 'Dezembro'}
+        ];
+}, []);
 
     const years = useMemo(() => {
         let uniqueYears: number[] = [];
@@ -152,8 +155,53 @@ const Dashboard: React.FC = () => {
             }
         }
     }, [totalBalance]);
-
     const { title, description, footerText, icon } = message;
+
+    const historyData = useMemo(() => {
+        return months.map((_, month) => {
+            let amountGains = 0;
+            gains.forEach(item => {
+                const date = new Date(item.date);
+                const gainMonth = date.getMonth();
+                const gainYear = date.getFullYear();
+
+                if(gainMonth === month && gainYear === yearSelected) {
+                    try {
+                        amountGains += Number(item.amount);
+                    } catch {
+                        throw new Error('amountGains is invalid. amountGains must be valid number.');
+                    }
+                }
+            });
+            let amountExpenses = 0;
+            expenses.forEach(item => {
+                const date = new Date(item.date);
+                const expenseMonth = date.getMonth();
+                const expenseYear = date.getFullYear();
+
+                if(expenseMonth === month && expenseYear === yearSelected) {
+                    try {
+                        amountExpenses += Number(item.amount);
+                    } catch {
+                        throw new Error('amountexpenses is invalid. amountexpenses must be valid number.');
+                    }
+                }
+            });
+
+            return {
+                monthNumber: month,
+                month: months[month].label.substring(0, 2),
+                amountGains,
+                amountExpenses
+            }
+        })
+        //Filtrar os meses que não tiveram movimentação
+        .filter(item => {
+            const currentMonth = new Date().getMonth();
+            const currentYear = new Date().getFullYear();
+            return (yearSelected === currentYear && item.monthNumber <= currentMonth) || (yearSelected < currentYear);
+        }); 
+    }, [months, yearSelected]);
 
     return (
     <Container>
@@ -200,6 +248,11 @@ const Dashboard: React.FC = () => {
                 icon={icon}
             />
             <PieChartComponent data={relationExpensesVersusGains} />
+            <HistoryBox 
+                data={historyData}
+                lineColorExpenses="#F7931B"
+                lineColorGains="#E44C4E"
+            />
         </Content>
     </Container>
 )
