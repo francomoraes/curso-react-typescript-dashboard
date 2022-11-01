@@ -41,12 +41,12 @@ const WalletBox: React.FC<IWalletBoxProps> = ({ title, amount, footerLabel, icon
             carregar a página: yarn add react-countup */}
             <span>{title}</span>
             <h1>
+                <strong>R$ </strong>
                 <CountUp
                     end={Number(amount)}
                     separator='.'
                     decimal=','
                     decimals={2}
-                    prefix='R$ '
                     duration={0.3}
                 />
             </h1>
