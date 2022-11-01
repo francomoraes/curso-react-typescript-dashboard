@@ -42,3 +42,22 @@ export const MenuItemLink = styled.a`
         margin-right: 5px;
     }
 `;
+export const MenuItemButton = styled.button`
+    align-items: center;
+    background: none;
+    border: none;
+    color: ${props => props.theme.color.info };
+    display: flex;
+    font-size: 16px;
+    margin: 7px 0;
+    transition: opacity .3s;
+
+    &:hover {
+        opacity: 0.7;
+    }
+
+    >svg {
+        font-size: 18px;
+        margin-right: 5px;
+    }
+`;
