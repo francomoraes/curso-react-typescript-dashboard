@@ -9,6 +9,10 @@ export const Container = styled.div`
     justify-content: space-between;
     margin-bottom: 25px;
     width: 100%;
+
+    @media (max-width: 320px) {
+        flex-direction: column;
+    }
 `;
 export const TitleContainer = styled.div<ITitleContainerProps>`
     > h1 {
@@ -24,4 +28,10 @@ export const TitleContainer = styled.div<ITitleContainerProps>`
 `;
 export const Controllers = styled.div`
     display: flex;
+
+    @media (max-width: 320px) {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 25px;
+    }
 `;

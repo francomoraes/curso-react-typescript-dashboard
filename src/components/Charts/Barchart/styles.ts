@@ -1,9 +1,23 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 //interfaces
 interface ILegendProps {
     color: string;
 }
+
+const animate = keyframes`
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+`;
 
 export const Container = styled.div`
     background-color: ${(props) => props.theme.color.tertiary};
@@ -13,6 +27,16 @@ export const Container = styled.div`
     margin: 10px 0;
     min-height: 260px;
     width: 48%;
+
+    animation: ${animate} 0.5s;
+
+    @media (max-width: 1200px) {
+        display: flex;
+        flex-direction: column;
+
+        width: 100%;
+        height: auto;
+    }
 `;
 export const SideLeft = styled.div`
     padding: 30px 20px;
@@ -44,6 +68,11 @@ export const LegendContainer = styled.ul`
     }
     ::-webkit-scrollbar-track {
         background-color: ${props => props.theme.color.tertiary };
+    }
+
+    @media (max-width: 1200px) {
+        display: flex;
+        height: auto;
     }
 `;
 export const Legend = styled.li<ILegendProps>`

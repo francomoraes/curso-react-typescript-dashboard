@@ -1,9 +1,23 @@
-import styled from 'styled-components' ;
+import styled, { keyframes } from 'styled-components' ;
 
 //interfaces
 interface ILegendProps {
     color: string;
 }
+
+const animate = keyframes`
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.3;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+`;
 
 export const Container = styled.div`
     background-color: ${props => props.theme.color.tertiary};
@@ -13,6 +27,8 @@ export const Container = styled.div`
     height: 260px;
     margin: 10px 0;
     width: 48%;
+
+    animation: ${animate} .5s;
 
     @media (max-width: 770px) {
         display: flex;
