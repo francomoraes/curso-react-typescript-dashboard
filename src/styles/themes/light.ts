@@ -10,7 +10,7 @@ const light = {
         black: '#fff',
         gray: '#BFBFBF',
 
-        success: '#03BB85',
+        success: '#4E41F0',
         info: '#3B5998',
         warning: '#FF6961',
 

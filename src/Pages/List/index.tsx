@@ -113,7 +113,7 @@ const List: React.FC = () => {
         const formattedData = filteredData.map(item => {
 
             return {
-                //id: solução gambiarra para ter key unico no map
+                //id: solução para ter key unico no map
                 id: String(new Date().getTime() + Math.random()),
                 description: item.description,
                 amountFormatted: formatCurrency(Number(item.amount)),

@@ -10,7 +10,7 @@ export const Container = styled.div`
     margin-bottom: 25px;
     width: 100%;
 
-    @media (max-width: 320px) {
+    @media (max-width: 600px) {
         flex-direction: column;
     }
 `;
@@ -24,14 +24,22 @@ export const TitleContainer = styled.div<ITitleContainerProps>`
             width: 55px;
             border-bottom: 10px solid ${props => props.lineColor};
         }
+
+        @media (max-width: 600px) {
+            width: 100%;
+        }
     }
 `;
 export const Controllers = styled.div`
     display: flex;
 
-    @media (max-width: 320px) {
+    @media (max-width: 600px) {
         width: 100%;
         justify-content: space-between;
         margin-top: 25px;
+
+        > div {
+            width: 48%;
+        }
     }
 `;

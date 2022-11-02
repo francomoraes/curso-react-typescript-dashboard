@@ -307,15 +307,15 @@ const Dashboard: React.FC = () => {
     <Container>
         <ContentHeader title='Dashboard' lineColor='#F7931B' >
             <SelectInput
-                    options={months}
-                    onChange={(e) => handleMonthSelected(e.target.value)}
-                    defaultValue={monthSelected}
-                />
-                <SelectInput
-                    options={years}
-                    onChange={(e) => setYearSelected(Number(e.target.value))}
-                    defaultValue={yearSelected}
-                />
+                options={months}
+                onChange={(e) => handleMonthSelected(e.target.value)}
+                defaultValue={monthSelected}
+            />
+            <SelectInput
+                options={years}
+                onChange={(e) => setYearSelected(Number(e.target.value))}
+                defaultValue={yearSelected}
+            />
         </ContentHeader>
 
         <Content>

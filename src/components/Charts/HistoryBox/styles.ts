@@ -34,6 +34,10 @@ export const Container = styled.div`
     }
 
     animation: ${animate} .5s;
+
+    @media (max-width: 770px) {
+        height: 400px;
+    }
 `;
 
 export const ChartContainer = styled.div`

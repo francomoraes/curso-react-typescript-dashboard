@@ -29,6 +29,13 @@ export const Header = styled.div`
 
     > h2 {
         align-self: center;
+
+        &::after {
+            content: '';
+            display: block;
+            width: 55px;
+            border-bottom: 10px solid ${props => props.theme.color.success};
+        }
     }
 `;
 export const CloseButtonContainer = styled.div`

@@ -1,46 +1,73 @@
-# Getting Started with Create React App
+# Minha-Carteira
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+É um projeto desenvolvido conforme o curso [React e typeScript: desenvolvendo um dasbhoard](https://www.udemy.com/course/react-e-typescript/).
 
-## Available Scripts
+Consiste em um app para controle financeiro pessoal/familar. Por enquanto ainda não é possível inserir dados, mas essa funcionalidade será implementada futuramente.
 
-In the project directory, you can run:
+Possui as seguintes telas:
+- Login
+- Dashboard
+- Entradas
+- Saídas
 
-### `npm start`
+<hr>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tela de entrada
+Nesta é possível clicar no botão para cadastro e será direcionado à tela de cadastro, porém a tela é somente visual. A implementação funcional será feita futuramente.
+É necessário inserir as credenciais email: "nome@email.com" e senha: "123" para ter acesso ao dashboard.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![image](./src/assets/readme/0-login.png)
 
-### `npm test`
+## Infográficos
+Apresenta os valores e gráficos conforme os arquivos de json de banco de dados na pasta "repositories". Será implementada integração com banco de dados posteriormente. Foi utilizada a biblioteca react-countup para fazer animação dos números e a biblioteca animation para animação dos cards ao carregar a página.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Os gráficos são alterados conforme o mês e ano selecionado. A data escolhida é mantida ao alterar ou recarregar a tela, devido armazenamento em localStorage.
 
-### `npm run build`
+![image](./src/assets/readme/1-dashboard.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Telas entrada e saída
+Apresenta os valores conforme os arquivos de json de banco de dados na pasta "repositories". Será implementada integração com banco de dados posteriormente. 
+Nessas telas é possível filtrar a exibição por lançamentos recorrentes ou eventuais ao clicar nos botões disponíveis.
+Os valores são alterados conforme o mês e ano selecionado. A data escolhida é mantida ao alterar ou recarregar a tela, devido armazenamento em localStorage.
+### Entradas
+![image](./src/assets/readme/3-entradas.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Saídas
+![image](./src/assets/readme/4-sa%C3%ADdas.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tema claro e escuro
+Foi utilizada a biblioteca react-switch para implementar o botão de troca de tema, e a propriedade localStorage para armazenar o tema escolhido pelo usuário. É possível fazer logout e login novamente que o tema será mantido.
 
-### `npm run eject`
+### Tema claro
+![image](src/assets/readme/5-lighMode.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<hr>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Implementações futuras
+- Funcionalidade de cadastro e login;
+- Integração com banco de dados;
+- Opção de inserção de dados;
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Tecnologias Utilizadas
+- Typescript
+- React
+- Styled-components
+- React-router-dom
+- Recharts
+- React-icons
+- React-switch
+- localStorage
+- React-countup
+- Create-react-app
+- VSCode
+- Responsively
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<hr>
 
-## Learn More
+## Author
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Franco Moraes
+<img src="src/assets/readme/flag-brazil.png" alt="brazilian flag" style="width: 20px; vertical-align: middle">
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[![GitHub](https://i.stack.imgur.com/tskMh.png)]() [GitHub](https://github.com/francomoraes) <br>
+[![LinkedIn](https://i.stack.imgur.com/gVE0j.png)]() [LinkedIn](https://www.linkedin.com/in/francomoraes/)
