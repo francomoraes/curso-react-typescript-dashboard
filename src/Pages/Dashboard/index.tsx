@@ -25,7 +25,18 @@ import BarchartBox from '../../components/Charts/Barchart';
 //Component
 const Dashboard: React.FC = () => {
 
-    const [ monthSelected, setMonthSelected ] = useState<number>(new Date().getMonth() + 1);
+    const [ monthSelected, setMonthSelected ] = useState<number>(() => {
+        
+        const monthStored = localStorage.getItem('@minha-carteira:monthSelected');
+        if(monthStored) {
+            return (parseInt(monthStored))
+        } else {
+            const currentMonth = new Date().getMonth() + 1;
+            localStorage.setItem('@minha-carteira:monthSelected', currentMonth.toString());
+            return currentMonth;
+        }
+
+    });    
     const [ yearSelected, setYearSelected ] = useState<number>(new Date().getFullYear());
     
     const months = useMemo(() => {
@@ -287,12 +298,17 @@ const Dashboard: React.FC = () => {
         ]
     },[monthSelected, yearSelected]);
 
+    const handleMonthSelected = (month: string) => {
+        setMonthSelected(Number(month));
+        localStorage.setItem('@minha-carteira:monthSelected', month);
+    }
+
     return (
     <Container>
         <ContentHeader title='Dashboard' lineColor='#F7931B' >
             <SelectInput
                     options={months}
-                    onChange={(e) => setMonthSelected(Number(e.target.value))}
+                    onChange={(e) => handleMonthSelected(e.target.value)}
                     defaultValue={monthSelected}
                 />
                 <SelectInput

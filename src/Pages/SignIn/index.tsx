@@ -15,26 +15,37 @@ import {
     FormTitle,
 } from './styles'
 
+//components
+import { ModalCadastro } from '../../components/ModalCadastro/index';
+
 const SignIn: React.FC = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [modalOpened, setModalOpened] = useState<boolean>(false);
 
     const { signIn } = useAuth();
 
   return (
-    <Container>
-        <Logo>
-            <img src={logoImg} alt="Logo Minha Carteira" />
-            <h3>Minha Carteira</h3>
-        </Logo>
-
-        <Form onSubmit={() => signIn(email, password)}>
-            <FormTitle>Entrar</FormTitle>
-            <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/>
-            <Input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} required/>
-            <Button type="submit">Acessar</Button>
-        </Form>
-    </Container>
+    <>
+        <ModalCadastro 
+            modalOpened={modalOpened}
+            closeModal={(arg) => setModalOpened(arg)}
+        />
+        <Container>
+            <Logo>
+                <img src={logoImg} alt="Logo Minha Carteira" />
+                <h3>Minha Carteira</h3>
+            </Logo>
+    
+            <Form onSubmit={() => signIn(email, password)}>
+                <FormTitle>Entrar</FormTitle>
+                <Input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required/>
+                <Input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)} required/>
+                <Button type="submit">Acessar</Button>
+                <Button type="button" onClick={() => setModalOpened(true)}>Cadastrar</Button>
+            </Form>
+        </Container>
+    </>
   )
 }
 

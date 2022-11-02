@@ -24,7 +24,18 @@ interface IData {
 const List: React.FC = () => {
 
     const [ data, setData ] = useState<IData[]>([]);
-    const [ monthSelected, setMonthSelected ] = useState<number>(new Date().getMonth() + 1);
+    const [ monthSelected, setMonthSelected ] = useState<number>(() => {
+        
+        const monthStored = localStorage.getItem('@minha-carteira:monthSelected');
+        if(monthStored) {
+            return (parseInt(monthStored))
+        } else {
+            const currentMonth = new Date().getMonth() + 1;
+            localStorage.setItem('@minha-carteira:monthSelected', currentMonth.toString());
+            return currentMonth;
+        }
+
+    });
     const [ yearSelected, setYearSelected ] = useState<number>(new Date().getFullYear());
     const [ selectedFrequency, setSelectedFrequency ] = useState(['recorrente', 'eventual']);
 
@@ -114,12 +125,17 @@ const List: React.FC = () => {
         setData(formattedData);
     }, [data.length, listData, monthSelected, yearSelected, selectedFrequency]);
 
+    const handleMonthSelected = (month: string) => {
+        setMonthSelected(Number(month));
+        localStorage.setItem('@minha-carteira:monthSelected', month);
+    }
+
   return (
     <Container>
         <ContentHeader title={title} lineColor={lineColor} >
             <SelectInput
                 options={months}
-                onChange={(e) => setMonthSelected(Number(e.target.value))}
+                onChange={(e) => handleMonthSelected(e.target.value)}
                 defaultValue={monthSelected}
             />
             <SelectInput

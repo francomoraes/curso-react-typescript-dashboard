@@ -21,11 +21,11 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     });
 
     const signIn = (email: string, password: string) => {
-        if (email === 'joao@email.com' && password === '123'){
+        if (email === 'nome@email.com' && password === '123'){
             localStorage.setItem('@minha-carteira:logged', 'true');
             setLogged(true);
         } else {
-            alert('Senha ou usuário inválido');
+            alert('Email deve ser "nome@email.com" e a senha "123". Validação e cadastro de usuários será implementada futuramente.');
         }
     }
 
