@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from "../components/Layout";
 
 import Dashboard from "../Pages/Dashboard";
@@ -8,13 +8,13 @@ import List from "../Pages/List";
 const AppRoutes: React.FC = () => {
   return (
     <Layout>
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path="/" element={<Dashboard/>} />
                 <Route path="/dashboard" element={<Dashboard/>} />
                 <Route path="/list/:movementType" element={<List/>} />
             </Routes>
-        </BrowserRouter>
+        </HashRouter>
     </Layout>
   );
 };
