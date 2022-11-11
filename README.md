@@ -10,6 +10,10 @@ Possui as seguintes telas:
 - Entradas
 - Saídas
 
+Os prints a seguir mostram a tela mobile na esquerda e a tela desktop na direita.
+
+[Link para acesso ao app](https://francomoraes.github.io/dashboard-minha-carteira/)
+
 <hr>
 
 ## Tela de entrada
